@@ -4,6 +4,8 @@ export function API({ stack }: StackContext) {
   const api = new Api(stack, "api", {
     routes: {
       "GET /": "packages/functions/src/lambda.handler",
+      "GET /trpc/{proxy+}": "packages/functions/src/trpc.handler",
+      "POST /trpc/{proxy+}": "packages/functions/src/trpc.handler",
     },
   });
 
@@ -18,6 +20,5 @@ export function API({ stack }: StackContext) {
 
   stack.addOutputs({
     ApiEndpoint: api.url,
-    SiteUrl: "" + site?.url,
   });
 }
